@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6c96bd6c33bd4d4b91627a0d3bdf8a12" Name="Diagram1">
+        <EntityTypeShape EntityType="SeatAllocationDBFinalModel.Activation" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeatAllocationDBFinalModel.City" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeatAllocationDBFinalModel.Country" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeatAllocationDBFinalModel.Department" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeatAllocationDBFinalModel.Designation" Width="1.5" PointX="5.25" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeatAllocationDBFinalModel.Employee" Width="1.5" PointX="7.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeatAllocationDBFinalModel.FloorInfo" Width="1.5" PointX="12.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeatAllocationDBFinalModel.FloorMatrix" Width="1.5" PointX="18" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeatAllocationDBFinalModel.ManagerToSeatPoolTemp" Width="1.5" PointX="9.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeatAllocationDBFinalModel.Office" Width="1.5" PointX="10.5" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeatAllocationDBFinalModel.PasswordTrail" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeatAllocationDBFinalModel.SeatAllocation" Width="1.5" PointX="15" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeatAllocationDBFinalModel.SeatAllocationHistory" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeatAllocationDBFinalModel.SeatDetail" Width="1.5" PointX="15" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeatAllocationDBFinalModel.State" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeatAllocationDBFinalModel.Image" Width="1.5" PointX="12.75" PointY="14.125" IsExpanded="true" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_City_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_City_State" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_Employee_City" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_Office_City" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_Employee_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_Office_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_State_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_Designation_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_Employee_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_Employee_Designation" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_Employee_State" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_ManagerToSeatPoolTemp_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_SeatAllocation_EmployeeEmpI" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_SeatAllocation_EmployeeMangerEmpId" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_FloorInfo_Office" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_FloorMatrix_FloorInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_SeatAllocation_FloorInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_SeatDetails_FloorInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_FloorMatrix_Office" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_ManagerToSeatPoolTemp_SeatDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_Image_Office" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_Office_State" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_SeatAllocation_Office" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_SeatDetails_Office" ManuallyRouted="false" />
+        <AssociationConnector Association="SeatAllocationDBFinalModel.FK_SeatAllocation_SeatDetails" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
