@@ -1,0 +1,12 @@
+﻿@model DigitalDesk.Models.Trial
+
+@{
+    ViewBag.Title = "Trial";
+}
+
+<h2>Trial</h2>
+
+@for (int i = 0; i < ViewBag.query.Count; i++)
+{
+<p>@ViewBag.query </p>
+}

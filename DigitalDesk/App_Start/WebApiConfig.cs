@@ -16,7 +16,7 @@ namespace DigitalDesk
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "call/{controller}/{id}",
+                routeTemplate: "call/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
 
