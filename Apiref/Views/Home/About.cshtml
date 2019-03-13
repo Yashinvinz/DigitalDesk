@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Use this area to provide additional information.</p>
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            alert("af");
+            $.ajax({
+                url: "http://localhost:64426/call/Office/GetOfficelist",
+                dataType: "json",
+                success:
+                    function (data) {
+                        alert(data);
+                    },
+                error:
+                    function (data) {
+                        alert("error");
+                    },
+                failure:
+                    function (dat) {
+                        alert("fail");
+                    }
+            });
+        });
+    </script>
+    }
