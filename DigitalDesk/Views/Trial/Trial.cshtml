@@ -1,0 +1,14 @@
+﻿@model IEnumerable<DigitalDesk.Models.Trial>
+
+@{
+    ViewBag.Title = "Trial";
+}
+
+<h2>Trial</h2>
+
+@foreach (var item in Model)
+{
+    <p>@item.OfficeId</p>
+    <p>@item.OfficeName</p>
+}
+
