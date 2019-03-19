@@ -1,0 +1,1650 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DigitalDeskManagementFinalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activation">
+          <Key>
+            <PropertyRef Name="AId" />
+          </Key>
+          <Property Name="AId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmailId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ActivationCode" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="int" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StateId" Type="int" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DeptId" />
+          </Key>
+          <Property Name="DeptId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeptName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Designation">
+          <Key>
+            <PropertyRef Name="DesgId" />
+          </Key>
+          <Property Name="DesgId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DesgName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeptId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmpId" />
+          </Key>
+          <Property Name="EmpId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmpName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReportingManager" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PwdHash" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageLink" Type="nvarchar" MaxLength="50" />
+          <Property Name="Designation" Type="int" Nullable="false" />
+          <Property Name="Department" Type="int" Nullable="false" />
+          <Property Name="Country" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="City" Type="int" Nullable="false" />
+          <Property Name="SaltHash" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="FloorInfo">
+          <Key>
+            <PropertyRef Name="FloorId" />
+          </Key>
+          <Property Name="FloorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FloorNo" Type="int" Nullable="false" />
+          <Property Name="NoOfSeats" Type="int" Nullable="false" />
+          <Property Name="NoOfDirectorRooms" Type="int" />
+          <Property Name="NoOfBoardRooms" Type="int" />
+          <Property Name="NoOfMeetingRooms" Type="int" />
+          <Property Name="OfficeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FloorMatrix">
+          <Key>
+            <PropertyRef Name="SectionId" />
+          </Key>
+          <Property Name="SectionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FloorId" Type="int" Nullable="false" />
+          <Property Name="OfficeId" Type="int" Nullable="false" />
+          <Property Name="SectionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RangeFrom" Type="int" Nullable="false" />
+          <Property Name="RangeEnd" Type="int" Nullable="false" />
+          <Property Name="Rows" Type="int" Nullable="false" />
+          <Property Name="Columns" Type="int" Nullable="false" />
+          <Property Name="Order" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DigitalDeskManagementFinalDB.dbo.Image' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="OfficeId" />
+          </Key>
+          <Property Name="OfficeId" Type="int" Nullable="false" />
+          <Property Name="ImageURL" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ManagerCabin">
+          <Key>
+            <PropertyRef Name="CabinId" />
+          </Key>
+          <Property Name="CabinId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CabinName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ManagerId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsAllocated" Type="bit" Nullable="false" />
+          <Property Name="OfficeId" Type="int" Nullable="false" />
+          <Property Name="FloorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ManagerToSeatPoolTemp">
+          <Key>
+            <PropertyRef Name="MSPId" />
+          </Key>
+          <Property Name="MSPId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ManagerId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SeatId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Office">
+          <Key>
+            <PropertyRef Name="OfficeId" />
+          </Key>
+          <Property Name="OfficeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OfficeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Block" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Latitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="Longitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Country" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PasswordTrail">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="FullName" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SeatAllocation">
+          <Key>
+            <PropertyRef Name="SAId" />
+          </Key>
+          <Property Name="SAId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SeatId" Type="int" Nullable="false" />
+          <Property Name="AllocatedDate" Type="date" Nullable="false" />
+          <Property Name="FloorId" Type="int" Nullable="false" />
+          <Property Name="OfficeId" Type="int" Nullable="false" />
+          <Property Name="AllocatedEmpId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AllocatedManagerId" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SeatAllocationHistory">
+          <Key>
+            <PropertyRef Name="HistoryId" />
+          </Key>
+          <Property Name="Reason" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SDate" Type="date" Nullable="false" />
+          <Property Name="EDate" Type="date" Nullable="false" />
+          <Property Name="SeatId" Type="int" Nullable="false" />
+          <Property Name="FloorId" Type="int" Nullable="false" />
+          <Property Name="OfficeId" Type="int" Nullable="false" />
+          <Property Name="AllocatedEmpId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AllocatedManagerId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SeatDetails">
+          <Key>
+            <PropertyRef Name="SeatId" />
+          </Key>
+          <Property Name="SeatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SeatNo" Type="int" Nullable="false" />
+          <Property Name="IsAllocated" Type="bit" Nullable="false" />
+          <Property Name="OfficeId" Type="int" Nullable="false" />
+          <Property Name="FloorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="StateId" Type="int" Nullable="false" />
+          <Property Name="StateName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'DigitalDeskManagementFinalDB.dbo.Trial' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Trial">
+          <Property Name="Tname" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
+        <Association Name="FK_City_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_City_State">
+          <End Role="State" Type="Self.State" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Designation_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Designation" Type="Self.Designation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptId" />
+            </Principal>
+            <Dependent Role="Designation">
+              <PropertyRef Name="DeptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_City">
+          <End Role="City" Type="Self.City" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Designation">
+          <End Role="Designation" Type="Self.Designation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Designation">
+              <PropertyRef Name="DesgId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Designation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_State">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="State" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FloorInfo_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FloorInfo" Type="Self.FloorInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="FloorInfo">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FloorMatrix_FloorInfo">
+          <End Role="FloorInfo" Type="Self.FloorInfo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FloorMatrix" Type="Self.FloorMatrix" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FloorInfo">
+              <PropertyRef Name="FloorId" />
+            </Principal>
+            <Dependent Role="FloorMatrix">
+              <PropertyRef Name="FloorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FloorMatrix_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="1" />
+          <End Role="FloorMatrix" Type="Self.FloorMatrix" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="FloorMatrix">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Image_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManagerCabin_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="ManagerCabin" Type="Self.ManagerCabin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="ManagerCabin">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManagerCabin_FloorInfo">
+          <End Role="FloorInfo" Type="Self.FloorInfo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ManagerCabin" Type="Self.ManagerCabin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FloorInfo">
+              <PropertyRef Name="FloorId" />
+            </Principal>
+            <Dependent Role="ManagerCabin">
+              <PropertyRef Name="FloorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManagerCabin_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="1" />
+          <End Role="ManagerCabin" Type="Self.ManagerCabin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="ManagerCabin">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManagerToSeatPoolTemp_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="ManagerToSeatPoolTemp" Type="Self.ManagerToSeatPoolTemp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="ManagerToSeatPoolTemp">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManagerToSeatPoolTemp_SeatDetails">
+          <End Role="SeatDetails" Type="Self.SeatDetails" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ManagerToSeatPoolTemp" Type="Self.ManagerToSeatPoolTemp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeatDetails">
+              <PropertyRef Name="SeatId" />
+            </Principal>
+            <Dependent Role="ManagerToSeatPoolTemp">
+              <PropertyRef Name="SeatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Office_City">
+          <End Role="City" Type="Self.City" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Office" Type="Self.Office" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Office">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Office_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Office" Type="Self.Office" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Office">
+              <PropertyRef Name="Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Office_State">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="Office" Type="Self.Office" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="Office">
+              <PropertyRef Name="State" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeatAllocation_EmployeeEmpI">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="SeatAllocation" Type="Self.SeatAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="SeatAllocation">
+              <PropertyRef Name="AllocatedEmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeatAllocation_EmployeeMangerEmpId">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="SeatAllocation" Type="Self.SeatAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="SeatAllocation">
+              <PropertyRef Name="AllocatedManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeatAllocation_FloorInfo">
+          <End Role="FloorInfo" Type="Self.FloorInfo" Multiplicity="1" />
+          <End Role="SeatAllocation" Type="Self.SeatAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FloorInfo">
+              <PropertyRef Name="FloorId" />
+            </Principal>
+            <Dependent Role="SeatAllocation">
+              <PropertyRef Name="FloorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeatAllocation_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="1" />
+          <End Role="SeatAllocation" Type="Self.SeatAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="SeatAllocation">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeatAllocation_SeatDetails">
+          <End Role="SeatDetails" Type="Self.SeatDetails" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SeatAllocation" Type="Self.SeatAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeatDetails">
+              <PropertyRef Name="SeatId" />
+            </Principal>
+            <Dependent Role="SeatAllocation">
+              <PropertyRef Name="SeatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeatDetails_FloorInfo">
+          <End Role="FloorInfo" Type="Self.FloorInfo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SeatDetails" Type="Self.SeatDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FloorInfo">
+              <PropertyRef Name="FloorId" />
+            </Principal>
+            <Dependent Role="SeatDetails">
+              <PropertyRef Name="FloorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeatDetails_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="1" />
+          <End Role="SeatDetails" Type="Self.SeatDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="SeatDetails">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_State_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="State" Type="Self.State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DigitalDeskManagementFinalDBModelStoreContainer">
+          <EntitySet Name="Activation" EntityType="Self.Activation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FloorInfo" EntityType="Self.FloorInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FloorMatrix" EntityType="Self.FloorMatrix" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ManagerCabin" EntityType="Self.ManagerCabin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ManagerToSeatPoolTemp" EntityType="Self.ManagerToSeatPoolTemp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Office" EntityType="Self.Office" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PasswordTrail" EntityType="Self.PasswordTrail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SeatAllocation" EntityType="Self.SeatAllocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SeatAllocationHistory" EntityType="Self.SeatAllocationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SeatDetails" EntityType="Self.SeatDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Image" EntityType="Self.Image" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Image].[OfficeId] AS [OfficeId], 
+    [Image].[ImageURL] AS [ImageURL]
+    FROM [dbo].[Image] AS [Image]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_State" Association="Self.FK_City_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Designation_Department" Association="Self.FK_Designation_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Designation" EntitySet="Designation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_City" Association="Self.FK_Employee_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Country" Association="Self.FK_Employee_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Designation" Association="Self.FK_Employee_Designation">
+            <End Role="Designation" EntitySet="Designation" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_State" Association="Self.FK_Employee_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FloorInfo_Office" Association="Self.FK_FloorInfo_Office">
+            <End Role="Office" EntitySet="Office" />
+            <End Role="FloorInfo" EntitySet="FloorInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FloorMatrix_FloorInfo" Association="Self.FK_FloorMatrix_FloorInfo">
+            <End Role="FloorInfo" EntitySet="FloorInfo" />
+            <End Role="FloorMatrix" EntitySet="FloorMatrix" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FloorMatrix_Office" Association="Self.FK_FloorMatrix_Office">
+            <End Role="Office" EntitySet="Office" />
+            <End Role="FloorMatrix" EntitySet="FloorMatrix" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Image_Office" Association="Self.FK_Image_Office">
+            <End Role="Office" EntitySet="Office" />
+            <End Role="Image" EntitySet="Image" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManagerCabin_Employee" Association="Self.FK_ManagerCabin_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="ManagerCabin" EntitySet="ManagerCabin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManagerCabin_FloorInfo" Association="Self.FK_ManagerCabin_FloorInfo">
+            <End Role="FloorInfo" EntitySet="FloorInfo" />
+            <End Role="ManagerCabin" EntitySet="ManagerCabin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManagerCabin_Office" Association="Self.FK_ManagerCabin_Office">
+            <End Role="Office" EntitySet="Office" />
+            <End Role="ManagerCabin" EntitySet="ManagerCabin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManagerToSeatPoolTemp_Employee" Association="Self.FK_ManagerToSeatPoolTemp_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="ManagerToSeatPoolTemp" EntitySet="ManagerToSeatPoolTemp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManagerToSeatPoolTemp_SeatDetails" Association="Self.FK_ManagerToSeatPoolTemp_SeatDetails">
+            <End Role="SeatDetails" EntitySet="SeatDetails" />
+            <End Role="ManagerToSeatPoolTemp" EntitySet="ManagerToSeatPoolTemp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Office_City" Association="Self.FK_Office_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Office" EntitySet="Office" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Office_Country" Association="Self.FK_Office_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Office" EntitySet="Office" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Office_State" Association="Self.FK_Office_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="Office" EntitySet="Office" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeatAllocation_EmployeeEmpI" Association="Self.FK_SeatAllocation_EmployeeEmpI">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="SeatAllocation" EntitySet="SeatAllocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeatAllocation_EmployeeMangerEmpId" Association="Self.FK_SeatAllocation_EmployeeMangerEmpId">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="SeatAllocation" EntitySet="SeatAllocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeatAllocation_FloorInfo" Association="Self.FK_SeatAllocation_FloorInfo">
+            <End Role="FloorInfo" EntitySet="FloorInfo" />
+            <End Role="SeatAllocation" EntitySet="SeatAllocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeatAllocation_Office" Association="Self.FK_SeatAllocation_Office">
+            <End Role="Office" EntitySet="Office" />
+            <End Role="SeatAllocation" EntitySet="SeatAllocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeatAllocation_SeatDetails" Association="Self.FK_SeatAllocation_SeatDetails">
+            <End Role="SeatDetails" EntitySet="SeatDetails" />
+            <End Role="SeatAllocation" EntitySet="SeatAllocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeatDetails_FloorInfo" Association="Self.FK_SeatDetails_FloorInfo">
+            <End Role="FloorInfo" EntitySet="FloorInfo" />
+            <End Role="SeatDetails" EntitySet="SeatDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeatDetails_Office" Association="Self.FK_SeatDetails_Office">
+            <End Role="Office" EntitySet="Office" />
+            <End Role="SeatDetails" EntitySet="SeatDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_State_Country" Association="Self.FK_State_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="State" EntitySet="State" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DigitalDeskManagementFinalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Activation">
+          <Key>
+            <PropertyRef Name="AId" />
+          </Key>
+          <Property Name="AId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ActivationCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_City_Country" FromRole="City" ToRole="Country" />
+          <NavigationProperty Name="State" Relationship="Self.FK_City_State" FromRole="City" ToRole="State" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_City" FromRole="City" ToRole="Employee" />
+          <NavigationProperty Name="Offices" Relationship="Self.FK_Office_City" FromRole="City" ToRole="Office" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK_City_Country" FromRole="Country" ToRole="City" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_Country" FromRole="Country" ToRole="Employee" />
+          <NavigationProperty Name="Offices" Relationship="Self.FK_Office_Country" FromRole="Country" ToRole="Office" />
+          <NavigationProperty Name="States" Relationship="Self.FK_State_Country" FromRole="Country" ToRole="State" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DeptId" />
+          </Key>
+          <Property Name="DeptId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeptName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Designations" Relationship="Self.FK_Designation_Department" FromRole="Department" ToRole="Designation" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_Department" FromRole="Department" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Designation">
+          <Key>
+            <PropertyRef Name="DesgId" />
+          </Key>
+          <Property Name="DesgId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DesgName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeptId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Designation_Department" FromRole="Designation" ToRole="Department" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_Designation" FromRole="Designation" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmpId" />
+          </Key>
+          <Property Name="EmpId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmpName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReportingManager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PwdHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ImageLink" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Designation" Type="Int32" Nullable="false" />
+          <Property Name="Department" Type="Int32" Nullable="false" />
+          <Property Name="Country" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="Int32" Nullable="false" />
+          <Property Name="SaltHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="City1" Relationship="Self.FK_Employee_City" FromRole="Employee" ToRole="City" />
+          <NavigationProperty Name="Country1" Relationship="Self.FK_Employee_Country" FromRole="Employee" ToRole="Country" />
+          <NavigationProperty Name="Department1" Relationship="Self.FK_Employee_Department" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Designation1" Relationship="Self.FK_Employee_Designation" FromRole="Employee" ToRole="Designation" />
+          <NavigationProperty Name="State1" Relationship="Self.FK_Employee_State" FromRole="Employee" ToRole="State" />
+          <NavigationProperty Name="ManagerCabins" Relationship="Self.FK_ManagerCabin_Employee" FromRole="Employee" ToRole="ManagerCabin" />
+          <NavigationProperty Name="ManagerToSeatPoolTemps" Relationship="Self.FK_ManagerToSeatPoolTemp_Employee" FromRole="Employee" ToRole="ManagerToSeatPoolTemp" />
+          <NavigationProperty Name="SeatAllocations" Relationship="Self.FK_SeatAllocation_EmployeeEmpI" FromRole="Employee" ToRole="SeatAllocation" />
+          <NavigationProperty Name="SeatAllocations1" Relationship="Self.FK_SeatAllocation_EmployeeMangerEmpId" FromRole="Employee" ToRole="SeatAllocation" />
+        </EntityType>
+        <EntityType Name="FloorInfo">
+          <Key>
+            <PropertyRef Name="FloorId" />
+          </Key>
+          <Property Name="FloorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FloorNo" Type="Int32" Nullable="false" />
+          <Property Name="NoOfSeats" Type="Int32" Nullable="false" />
+          <Property Name="NoOfDirectorRooms" Type="Int32" />
+          <Property Name="NoOfBoardRooms" Type="Int32" />
+          <Property Name="NoOfMeetingRooms" Type="Int32" />
+          <Property Name="OfficeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Office" Relationship="Self.FK_FloorInfo_Office" FromRole="FloorInfo" ToRole="Office" />
+          <NavigationProperty Name="FloorMatrices" Relationship="Self.FK_FloorMatrix_FloorInfo" FromRole="FloorInfo" ToRole="FloorMatrix" />
+          <NavigationProperty Name="ManagerCabins" Relationship="Self.FK_ManagerCabin_FloorInfo" FromRole="FloorInfo" ToRole="ManagerCabin" />
+          <NavigationProperty Name="SeatAllocations" Relationship="Self.FK_SeatAllocation_FloorInfo" FromRole="FloorInfo" ToRole="SeatAllocation" />
+          <NavigationProperty Name="SeatDetails" Relationship="Self.FK_SeatDetails_FloorInfo" FromRole="FloorInfo" ToRole="SeatDetails" />
+        </EntityType>
+        <EntityType Name="FloorMatrix">
+          <Key>
+            <PropertyRef Name="SectionId" />
+          </Key>
+          <Property Name="SectionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FloorId" Type="Int32" Nullable="false" />
+          <Property Name="OfficeId" Type="Int32" Nullable="false" />
+          <Property Name="SectionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RangeFrom" Type="Int32" Nullable="false" />
+          <Property Name="RangeEnd" Type="Int32" Nullable="false" />
+          <Property Name="Rows" Type="Int32" Nullable="false" />
+          <Property Name="Columns" Type="Int32" Nullable="false" />
+          <Property Name="Order" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FloorInfo" Relationship="Self.FK_FloorMatrix_FloorInfo" FromRole="FloorMatrix" ToRole="FloorInfo" />
+          <NavigationProperty Name="Office" Relationship="Self.FK_FloorMatrix_Office" FromRole="FloorMatrix" ToRole="Office" />
+        </EntityType>
+        <EntityType Name="ManagerCabin">
+          <Key>
+            <PropertyRef Name="CabinId" />
+          </Key>
+          <Property Name="CabinId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CabinName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ManagerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsAllocated" Type="Boolean" Nullable="false" />
+          <Property Name="OfficeId" Type="Int32" Nullable="false" />
+          <Property Name="FloorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_ManagerCabin_Employee" FromRole="ManagerCabin" ToRole="Employee" />
+          <NavigationProperty Name="FloorInfo" Relationship="Self.FK_ManagerCabin_FloorInfo" FromRole="ManagerCabin" ToRole="FloorInfo" />
+          <NavigationProperty Name="Office" Relationship="Self.FK_ManagerCabin_Office" FromRole="ManagerCabin" ToRole="Office" />
+        </EntityType>
+        <EntityType Name="ManagerToSeatPoolTemp">
+          <Key>
+            <PropertyRef Name="MSPId" />
+          </Key>
+          <Property Name="MSPId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ManagerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SeatId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_ManagerToSeatPoolTemp_Employee" FromRole="ManagerToSeatPoolTemp" ToRole="Employee" />
+          <NavigationProperty Name="SeatDetail" Relationship="Self.FK_ManagerToSeatPoolTemp_SeatDetails" FromRole="ManagerToSeatPoolTemp" ToRole="SeatDetails" />
+        </EntityType>
+        <EntityType Name="Office">
+          <Key>
+            <PropertyRef Name="OfficeId" />
+          </Key>
+          <Property Name="OfficeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OfficeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Block" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="Country" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="City1" Relationship="Self.FK_Office_City" FromRole="Office" ToRole="City" />
+          <NavigationProperty Name="Country1" Relationship="Self.FK_Office_Country" FromRole="Office" ToRole="Country" />
+          <NavigationProperty Name="FloorInfoes" Relationship="Self.FK_FloorInfo_Office" FromRole="Office" ToRole="FloorInfo" />
+          <NavigationProperty Name="FloorMatrices" Relationship="Self.FK_FloorMatrix_Office" FromRole="Office" ToRole="FloorMatrix" />
+          <NavigationProperty Name="ManagerCabins" Relationship="Self.FK_ManagerCabin_Office" FromRole="Office" ToRole="ManagerCabin" />
+          <NavigationProperty Name="Image" Relationship="Self.FK_Image_Office" FromRole="Office" ToRole="Image" />
+          <NavigationProperty Name="State1" Relationship="Self.FK_Office_State" FromRole="Office" ToRole="State" />
+          <NavigationProperty Name="SeatAllocations" Relationship="Self.FK_SeatAllocation_Office" FromRole="Office" ToRole="SeatAllocation" />
+          <NavigationProperty Name="SeatDetails" Relationship="Self.FK_SeatDetails_Office" FromRole="Office" ToRole="SeatDetails" />
+        </EntityType>
+        <EntityType Name="PasswordTrail">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SeatAllocation">
+          <Key>
+            <PropertyRef Name="SAId" />
+          </Key>
+          <Property Name="SAId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeatId" Type="Int32" Nullable="false" />
+          <Property Name="AllocatedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FloorId" Type="Int32" Nullable="false" />
+          <Property Name="OfficeId" Type="Int32" Nullable="false" />
+          <Property Name="AllocatedEmpId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AllocatedManagerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_SeatAllocation_EmployeeEmpI" FromRole="SeatAllocation" ToRole="Employee" />
+          <NavigationProperty Name="Employee1" Relationship="Self.FK_SeatAllocation_EmployeeMangerEmpId" FromRole="SeatAllocation" ToRole="Employee" />
+          <NavigationProperty Name="FloorInfo" Relationship="Self.FK_SeatAllocation_FloorInfo" FromRole="SeatAllocation" ToRole="FloorInfo" />
+          <NavigationProperty Name="Office" Relationship="Self.FK_SeatAllocation_Office" FromRole="SeatAllocation" ToRole="Office" />
+          <NavigationProperty Name="SeatDetail" Relationship="Self.FK_SeatAllocation_SeatDetails" FromRole="SeatAllocation" ToRole="SeatDetails" />
+        </EntityType>
+        <EntityType Name="SeatAllocationHistory">
+          <Key>
+            <PropertyRef Name="HistoryId" />
+          </Key>
+          <Property Name="Reason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SeatId" Type="Int32" Nullable="false" />
+          <Property Name="FloorId" Type="Int32" Nullable="false" />
+          <Property Name="OfficeId" Type="Int32" Nullable="false" />
+          <Property Name="AllocatedEmpId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AllocatedManagerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="SeatDetail">
+          <Key>
+            <PropertyRef Name="SeatId" />
+          </Key>
+          <Property Name="SeatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeatNo" Type="Int32" Nullable="false" />
+          <Property Name="IsAllocated" Type="Boolean" Nullable="false" />
+          <Property Name="OfficeId" Type="Int32" Nullable="false" />
+          <Property Name="FloorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FloorInfo" Relationship="Self.FK_SeatDetails_FloorInfo" FromRole="SeatDetails" ToRole="FloorInfo" />
+          <NavigationProperty Name="ManagerToSeatPoolTemps" Relationship="Self.FK_ManagerToSeatPoolTemp_SeatDetails" FromRole="SeatDetails" ToRole="ManagerToSeatPoolTemp" />
+          <NavigationProperty Name="Office" Relationship="Self.FK_SeatDetails_Office" FromRole="SeatDetails" ToRole="Office" />
+          <NavigationProperty Name="SeatAllocations" Relationship="Self.FK_SeatAllocation_SeatDetails" FromRole="SeatDetails" ToRole="SeatAllocation" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <Property Name="StateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK_City_State" FromRole="State" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_State_Country" FromRole="State" ToRole="Country" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_State" FromRole="State" ToRole="Employee" />
+          <NavigationProperty Name="Offices" Relationship="Self.FK_Office_State" FromRole="State" ToRole="Office" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="OfficeId" />
+          </Key>
+          <Property Name="OfficeId" Type="Int32" Nullable="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Office" Relationship="Self.FK_Image_Office" FromRole="Image" ToRole="Office" />
+        </EntityType>
+        <Association Name="FK_City_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_City_State">
+          <End Role="State" Type="Self.State" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_City">
+          <End Role="City" Type="Self.City" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Office_City">
+          <End Role="City" Type="Self.City" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Office" Type="Self.Office" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Office">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Office_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Office" Type="Self.Office" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Office">
+              <PropertyRef Name="Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_State_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="State" Type="Self.State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Designation_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Designation" Type="Self.Designation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptId" />
+            </Principal>
+            <Dependent Role="Designation">
+              <PropertyRef Name="DeptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Designation">
+          <End Role="Designation" Type="Self.Designation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Designation">
+              <PropertyRef Name="DesgId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Designation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_State">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="State" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManagerCabin_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="ManagerCabin" Type="Self.ManagerCabin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="ManagerCabin">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManagerToSeatPoolTemp_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="ManagerToSeatPoolTemp" Type="Self.ManagerToSeatPoolTemp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="ManagerToSeatPoolTemp">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeatAllocation_EmployeeEmpI">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="SeatAllocation" Type="Self.SeatAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="SeatAllocation">
+              <PropertyRef Name="AllocatedEmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeatAllocation_EmployeeMangerEmpId">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="SeatAllocation" Type="Self.SeatAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="SeatAllocation">
+              <PropertyRef Name="AllocatedManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FloorInfo_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FloorInfo" Type="Self.FloorInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="FloorInfo">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FloorMatrix_FloorInfo">
+          <End Role="FloorInfo" Type="Self.FloorInfo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FloorMatrix" Type="Self.FloorMatrix" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FloorInfo">
+              <PropertyRef Name="FloorId" />
+            </Principal>
+            <Dependent Role="FloorMatrix">
+              <PropertyRef Name="FloorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManagerCabin_FloorInfo">
+          <End Role="FloorInfo" Type="Self.FloorInfo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ManagerCabin" Type="Self.ManagerCabin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FloorInfo">
+              <PropertyRef Name="FloorId" />
+            </Principal>
+            <Dependent Role="ManagerCabin">
+              <PropertyRef Name="FloorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeatAllocation_FloorInfo">
+          <End Role="FloorInfo" Type="Self.FloorInfo" Multiplicity="1" />
+          <End Role="SeatAllocation" Type="Self.SeatAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FloorInfo">
+              <PropertyRef Name="FloorId" />
+            </Principal>
+            <Dependent Role="SeatAllocation">
+              <PropertyRef Name="FloorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeatDetails_FloorInfo">
+          <End Role="FloorInfo" Type="Self.FloorInfo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SeatDetails" Type="Self.SeatDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FloorInfo">
+              <PropertyRef Name="FloorId" />
+            </Principal>
+            <Dependent Role="SeatDetails">
+              <PropertyRef Name="FloorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FloorMatrix_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="1" />
+          <End Role="FloorMatrix" Type="Self.FloorMatrix" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="FloorMatrix">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManagerCabin_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="1" />
+          <End Role="ManagerCabin" Type="Self.ManagerCabin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="ManagerCabin">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManagerToSeatPoolTemp_SeatDetails">
+          <End Role="SeatDetails" Type="Self.SeatDetail" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ManagerToSeatPoolTemp" Type="Self.ManagerToSeatPoolTemp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeatDetails">
+              <PropertyRef Name="SeatId" />
+            </Principal>
+            <Dependent Role="ManagerToSeatPoolTemp">
+              <PropertyRef Name="SeatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Image_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Office_State">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="Office" Type="Self.Office" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="Office">
+              <PropertyRef Name="State" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeatAllocation_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="1" />
+          <End Role="SeatAllocation" Type="Self.SeatAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="SeatAllocation">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeatDetails_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="1" />
+          <End Role="SeatDetails" Type="Self.SeatDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="SeatDetails">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeatAllocation_SeatDetails">
+          <End Role="SeatDetails" Type="Self.SeatDetail" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SeatAllocation" Type="Self.SeatAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeatDetails">
+              <PropertyRef Name="SeatId" />
+            </Principal>
+            <Dependent Role="SeatAllocation">
+              <PropertyRef Name="SeatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DigitalDeskManagementFinalDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Activations" EntityType="Self.Activation" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Designations" EntityType="Self.Designation" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="FloorInfoes" EntityType="Self.FloorInfo" />
+          <EntitySet Name="FloorMatrices" EntityType="Self.FloorMatrix" />
+          <EntitySet Name="ManagerCabins" EntityType="Self.ManagerCabin" />
+          <EntitySet Name="ManagerToSeatPoolTemps" EntityType="Self.ManagerToSeatPoolTemp" />
+          <EntitySet Name="Offices" EntityType="Self.Office" />
+          <EntitySet Name="PasswordTrails" EntityType="Self.PasswordTrail" />
+          <EntitySet Name="SeatAllocations" EntityType="Self.SeatAllocation" />
+          <EntitySet Name="SeatAllocationHistories" EntityType="Self.SeatAllocationHistory" />
+          <EntitySet Name="SeatDetails" EntityType="Self.SeatDetail" />
+          <EntitySet Name="States" EntityType="Self.State" />
+          <EntitySet Name="Images" EntityType="Self.Image" />
+          <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_State" Association="Self.FK_City_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_City" Association="Self.FK_Employee_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Office_City" Association="Self.FK_Office_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Office" EntitySet="Offices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Country" Association="Self.FK_Employee_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Office_Country" Association="Self.FK_Office_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Office" EntitySet="Offices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_State_Country" Association="Self.FK_State_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="State" EntitySet="States" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Designation_Department" Association="Self.FK_Designation_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Designation" EntitySet="Designations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Designation" Association="Self.FK_Employee_Designation">
+            <End Role="Designation" EntitySet="Designations" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_State" Association="Self.FK_Employee_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManagerCabin_Employee" Association="Self.FK_ManagerCabin_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="ManagerCabin" EntitySet="ManagerCabins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManagerToSeatPoolTemp_Employee" Association="Self.FK_ManagerToSeatPoolTemp_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="ManagerToSeatPoolTemp" EntitySet="ManagerToSeatPoolTemps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeatAllocation_EmployeeEmpI" Association="Self.FK_SeatAllocation_EmployeeEmpI">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="SeatAllocation" EntitySet="SeatAllocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeatAllocation_EmployeeMangerEmpId" Association="Self.FK_SeatAllocation_EmployeeMangerEmpId">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="SeatAllocation" EntitySet="SeatAllocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FloorInfo_Office" Association="Self.FK_FloorInfo_Office">
+            <End Role="Office" EntitySet="Offices" />
+            <End Role="FloorInfo" EntitySet="FloorInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FloorMatrix_FloorInfo" Association="Self.FK_FloorMatrix_FloorInfo">
+            <End Role="FloorInfo" EntitySet="FloorInfoes" />
+            <End Role="FloorMatrix" EntitySet="FloorMatrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManagerCabin_FloorInfo" Association="Self.FK_ManagerCabin_FloorInfo">
+            <End Role="FloorInfo" EntitySet="FloorInfoes" />
+            <End Role="ManagerCabin" EntitySet="ManagerCabins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeatAllocation_FloorInfo" Association="Self.FK_SeatAllocation_FloorInfo">
+            <End Role="FloorInfo" EntitySet="FloorInfoes" />
+            <End Role="SeatAllocation" EntitySet="SeatAllocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeatDetails_FloorInfo" Association="Self.FK_SeatDetails_FloorInfo">
+            <End Role="FloorInfo" EntitySet="FloorInfoes" />
+            <End Role="SeatDetails" EntitySet="SeatDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FloorMatrix_Office" Association="Self.FK_FloorMatrix_Office">
+            <End Role="Office" EntitySet="Offices" />
+            <End Role="FloorMatrix" EntitySet="FloorMatrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManagerCabin_Office" Association="Self.FK_ManagerCabin_Office">
+            <End Role="Office" EntitySet="Offices" />
+            <End Role="ManagerCabin" EntitySet="ManagerCabins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManagerToSeatPoolTemp_SeatDetails" Association="Self.FK_ManagerToSeatPoolTemp_SeatDetails">
+            <End Role="SeatDetails" EntitySet="SeatDetails" />
+            <End Role="ManagerToSeatPoolTemp" EntitySet="ManagerToSeatPoolTemps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Image_Office" Association="Self.FK_Image_Office">
+            <End Role="Office" EntitySet="Offices" />
+            <End Role="Image" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Office_State" Association="Self.FK_Office_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="Office" EntitySet="Offices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeatAllocation_Office" Association="Self.FK_SeatAllocation_Office">
+            <End Role="Office" EntitySet="Offices" />
+            <End Role="SeatAllocation" EntitySet="SeatAllocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeatDetails_Office" Association="Self.FK_SeatDetails_Office">
+            <End Role="Office" EntitySet="Offices" />
+            <End Role="SeatDetails" EntitySet="SeatDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeatAllocation_SeatDetails" Association="Self.FK_SeatAllocation_SeatDetails">
+            <End Role="SeatDetails" EntitySet="SeatDetails" />
+            <End Role="SeatAllocation" EntitySet="SeatAllocations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DigitalDeskManagementFinalDBModelStoreContainer" CdmEntityContainer="DigitalDeskManagementFinalDBEntities">
+          <EntitySetMapping Name="Activations">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.Activation">
+              <MappingFragment StoreEntitySet="Activation">
+                <ScalarProperty Name="AId" ColumnName="AId" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Designations">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.Designation">
+              <MappingFragment StoreEntitySet="Designation">
+                <ScalarProperty Name="DesgId" ColumnName="DesgId" />
+                <ScalarProperty Name="DesgName" ColumnName="DesgName" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="ReportingManager" ColumnName="ReportingManager" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PwdHash" ColumnName="PwdHash" />
+                <ScalarProperty Name="ImageLink" ColumnName="ImageLink" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="SaltHash" ColumnName="SaltHash" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FloorInfoes">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.FloorInfo">
+              <MappingFragment StoreEntitySet="FloorInfo">
+                <ScalarProperty Name="FloorId" ColumnName="FloorId" />
+                <ScalarProperty Name="FloorNo" ColumnName="FloorNo" />
+                <ScalarProperty Name="NoOfSeats" ColumnName="NoOfSeats" />
+                <ScalarProperty Name="NoOfDirectorRooms" ColumnName="NoOfDirectorRooms" />
+                <ScalarProperty Name="NoOfBoardRooms" ColumnName="NoOfBoardRooms" />
+                <ScalarProperty Name="NoOfMeetingRooms" ColumnName="NoOfMeetingRooms" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FloorMatrices">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.FloorMatrix">
+              <MappingFragment StoreEntitySet="FloorMatrix">
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+                <ScalarProperty Name="FloorId" ColumnName="FloorId" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+                <ScalarProperty Name="RangeFrom" ColumnName="RangeFrom" />
+                <ScalarProperty Name="RangeEnd" ColumnName="RangeEnd" />
+                <ScalarProperty Name="Rows" ColumnName="Rows" />
+                <ScalarProperty Name="Columns" ColumnName="Columns" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManagerCabins">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.ManagerCabin">
+              <MappingFragment StoreEntitySet="ManagerCabin">
+                <ScalarProperty Name="CabinId" ColumnName="CabinId" />
+                <ScalarProperty Name="CabinName" ColumnName="CabinName" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="IsAllocated" ColumnName="IsAllocated" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="FloorId" ColumnName="FloorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManagerToSeatPoolTemps">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.ManagerToSeatPoolTemp">
+              <MappingFragment StoreEntitySet="ManagerToSeatPoolTemp">
+                <ScalarProperty Name="MSPId" ColumnName="MSPId" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="SeatId" ColumnName="SeatId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offices">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.Office">
+              <MappingFragment StoreEntitySet="Office">
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Block" ColumnName="Block" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PasswordTrails">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.PasswordTrail">
+              <MappingFragment StoreEntitySet="PasswordTrail">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SeatAllocations">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.SeatAllocation">
+              <MappingFragment StoreEntitySet="SeatAllocation">
+                <ScalarProperty Name="SAId" ColumnName="SAId" />
+                <ScalarProperty Name="SeatId" ColumnName="SeatId" />
+                <ScalarProperty Name="AllocatedDate" ColumnName="AllocatedDate" />
+                <ScalarProperty Name="FloorId" ColumnName="FloorId" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="AllocatedEmpId" ColumnName="AllocatedEmpId" />
+                <ScalarProperty Name="AllocatedManagerId" ColumnName="AllocatedManagerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SeatAllocationHistories">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.SeatAllocationHistory">
+              <MappingFragment StoreEntitySet="SeatAllocationHistory">
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="SDate" ColumnName="SDate" />
+                <ScalarProperty Name="EDate" ColumnName="EDate" />
+                <ScalarProperty Name="SeatId" ColumnName="SeatId" />
+                <ScalarProperty Name="FloorId" ColumnName="FloorId" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="AllocatedEmpId" ColumnName="AllocatedEmpId" />
+                <ScalarProperty Name="AllocatedManagerId" ColumnName="AllocatedManagerId" />
+                <ScalarProperty Name="HistoryId" ColumnName="HistoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SeatDetails">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.SeatDetail">
+              <MappingFragment StoreEntitySet="SeatDetails">
+                <ScalarProperty Name="SeatId" ColumnName="SeatId" />
+                <ScalarProperty Name="SeatNo" ColumnName="SeatNo" />
+                <ScalarProperty Name="IsAllocated" ColumnName="IsAllocated" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="FloorId" ColumnName="FloorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="DigitalDeskManagementFinalDBModel.Image">
+              <MappingFragment StoreEntitySet="Image">
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

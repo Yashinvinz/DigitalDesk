@@ -167,6 +167,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="Controllers\OfficeController.cs" />
     <Compile Include="Controllers\TrialController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -231,6 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Info\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -262,9 +264,17 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FinalData\FinalData.csproj">
+      <Project>{6df0c69c-cd46-41cc-9813-85b33d55e549}</Project>
+      <Name>FinalData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OfficeDataAccess\OfficeDataAccess.csproj">
       <Project>{04ea9444-495e-4824-b1fb-e56a59c35986}</Project>
       <Name>OfficeDataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Officedatas\Officedatas.csproj">
+      <Project>{5df37918-5525-402d-a6f7-89d9d760361f}</Project>
+      <Name>Officedatas</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,25 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using OfficeDataAccess;
+
+
 using System.Web.Http.Results;
+using FinalData;
 
 namespace DigitalDesk.Controllers
 {
     public class OfficeController : ApiController
     {
-        public IEnumerable<Employee> GetEmployeeList()
-        {
-            using (SeatAllocationDBFinalEntities dbfinal = new SeatAllocationDBFinalEntities())
-            {
-                return dbfinal.Employees.ToList();
-            }
-        }
-
+        public DigitalDeskManagementFinalDBEntities Db = new DigitalDeskManagementFinalDBEntities();
+        
         //Another method to send list as json
+
+        //public IEnumerable<Employee> GetEmployeeList()
+        //{
+        //    using (SeatAllocationDBFinalEntities dbfinal = new SeatAllocationDBFinalEntities())
+        //    {
+        //        return dbfinal.Employees.ToList();
+        //    }
+        //}
+
+
 
         //public JsonResult<Employee> Get(string id)
         //{
@@ -96,39 +104,39 @@ namespace DigitalDesk.Controllers
             
         }
 
-        public HttpResponseMessage Put(string id,[FromBody]Employee employee)
-        {
-            try
-            {
-                using (SeatAllocationDBFinalEntities dbfinal = new SeatAllocationDBFinalEntities())
-                {
-                    var response = dbfinal.Employees.FirstOrDefault(e => e.EmpId == id);
-                    if (response == null)
-                    {
-                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Employee with id :" + id.ToString() + "does not exist");
-                    }
-                    else
-                    {
-                        response.EmpName = employee.EmpName;
-                        response.Email = employee.Email;
-                        response.Address = response.Address;
-                        response.City = employee.City;
-                        response.Country = employee.Country;
-                        response.State = employee.State;
-                        response.PhoneNo = employee.PhoneNo;
-                        response.Designation = employee.Designation;
-                        response.Department = employee.Department;
+        //public HttpResponseMessage Put(string id,[FromBody]Employee employee)
+        //{
+        //    try
+        //    {
+        //        using (SeatAllocationDBFinalEntities dbfinal = new SeatAllocationDBFinalEntities())
+        //        {
+        //            var response = dbfinal.Employees.FirstOrDefault(e => e.EmpId == id);
+        //            if (response == null)
+        //            {
+        //                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Employee with id :" + id.ToString() + "does not exist");
+        //            }
+        //            else
+        //            {
+        //                response.EmpName = employee.EmpName;
+        //                response.Email = employee.Email;
+        //                response.Address = response.Address;
+        //                response.City = employee.City;
+        //                response.Country = employee.Country;
+        //                response.State = employee.State;
+        //                response.PhoneNo = employee.PhoneNo;
+        //                response.Designation = employee.Designation;
+        //                response.Department = employee.Department;
 
-                        dbfinal.SaveChanges();
-                        return Request.CreateResponse(HttpStatusCode.OK, response);
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
-            }
-        }
+        //                dbfinal.SaveChanges();
+        //                return Request.CreateResponse(HttpStatusCode.OK, response);
+        //            }
+        //        }
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+        //    }
+        //}
 
         //APIs for Office Controller
         
@@ -183,7 +191,7 @@ namespace DigitalDesk.Controllers
 
         //APIs for Info controller
         //Chart data 
-        public HttpResponseMessage Getseats(int offid, int floorid)
+        public HttpResponseMessage GetTotalSeats(int offid, int floorid)
         {
             try
             {
@@ -200,7 +208,7 @@ namespace DigitalDesk.Controllers
                                           join o in dbfinal.Offices on s.OfficeId equals o.OfficeId
                                           where s.OfficeId == offid && s.FloorId == floorid && s.IsAllocated == true
                                           select s.IsAllocated).Count();
-                    var offname = (from o in dbfinal.Offices where o.OfficeId == 1 select o.OfficeName).FirstOrDefault();
+                    var offname = (from o in dbfinal.Offices where o.OfficeId == offid select o.OfficeName).FirstOrDefault();
 
                    var availableseats = totalseats - allocatedseats;
                     if (totalseats > 0)
@@ -220,20 +228,93 @@ namespace DigitalDesk.Controllers
         }
         //Director's data
 
-        //public HttpResponseMessage GetDirectorData()
-        //{
-        //    try
-        //    {
-        //        using (SeatAllocationDBFinalEntities dbfinal = new SeatAllocationDBFinalEntities)
-        //        {
-        //            var dirdata = dbfinal.Cities.ToList();
-        //            return requedirdata;
-        //        }
-        //    }
-        //    catch(Exception)
-        //    {
+        public HttpResponseMessage GetDirector(int officeId, int floorId)
+        {
+            try
+            {
+                var dirdata = (from e in Db.Employees
+                               join d in Db.Departments on e.Department equals d.DeptId
+                               join m in Db.ManagerCabins on e.EmpId equals m.ManagerId
+                               where m.OfficeId == officeId && m.FloorId == floorId
+                               select new { e.EmpId, e.EmpName, d.DeptName}).ToList();
+                if (dirdata != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, dirdata);
+                }
+                else
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.NoContent, "Get out");
+                }
+            }
+            catch(Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+        }
 
-        //    }
-        //}
+        //Dir dashboard
+        public HttpResponseMessage GetDirectorInfo(string managerId)
+        {
+            try
+            {
+                var dirinfo = (from e in Db.Employees
+                               join d in Db.Departments on e.Department equals d.DeptId
+                               join s in Db.Designations on e.Designation equals s.DesgId
+                               where e.EmpId == managerId
+                               select new { e.EmpName, d.DeptName, s.DesgName }).ToList();
+
+                var seatcount = Db.ManagerToSeatPoolTemps.Where(e => e.ManagerId == managerId).Select(e => e.SeatId).ToList().Count();
+
+                var allocatedcount = (from m in Db.ManagerToSeatPoolTemps
+                                      join s in Db.SeatDetails on m.SeatId equals s.SeatId
+                                      where s.IsAllocated == true && m.ManagerId == managerId
+                                      select s.SeatId).ToList().Count();
+
+                var unallocatedcount = seatcount - allocatedcount;
+
+                if (dirinfo != null && seatcount > 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, new { dirinfo, seatcount, allocatedcount, unallocatedcount});
+                }
+                else
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                }
+            }
+            catch(Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
+        }
+
+        public HttpResponseMessage GetDirectorPool(string managerId)
+        {
+            try
+            {
+                var allseats = (from m in Db.ManagerToSeatPoolTemps
+                                join s in Db.SeatDetails on m.SeatId equals s.SeatId
+                                where m.ManagerId == managerId
+                                select s.SeatId).ToList();
+
+                var allocatedseats = (from m in Db.ManagerToSeatPoolTemps
+                                      join s in Db.SeatDetails on m.SeatId equals s.SeatId
+                                      where s.IsAllocated == true && m.ManagerId == managerId
+                                      select s.SeatId).ToList();
+
+                if (allseats != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, new { allseats, allocatedseats });
+                }
+                else
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.NoContent, "No Content found");
+                }
+            }
+            catch(Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+        }
+       
     }
 }
