@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="de2c96772f5f4b7bb62dafb155c953d1" Name="Diagram1">
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.Activation" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.City" Width="1.5" PointX="5.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.Country" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.Department" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.Designation" Width="1.5" PointX="5.25" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.Employee" Width="1.5" PointX="7.5" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.FloorInfo" Width="1.5" PointX="12.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.FloorMatrix" Width="1.5" PointX="15" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.ManagerCabin" Width="1.5" PointX="15" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.ManagerToSeatPoolTemp" Width="1.5" PointX="9.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.Office" Width="1.5" PointX="10.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.PasswordTrail" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.SeatAllocation" Width="1.5" PointX="18" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.SeatAllocationHistory" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.SeatDetail" Width="1.5" PointX="15" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.State" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigitalDeskManagementFinalDBModel.Image" Width="1.5" PointX="12.75" PointY="16.25" IsExpanded="true" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_City_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_City_State" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_Employee_City" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_Office_City" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_Employee_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_Office_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_State_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_Designation_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_Employee_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_Employee_Designation" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_Employee_State" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_ManagerCabin_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_ManagerToSeatPoolTemp_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_SeatAllocation_EmployeeEmpI" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_SeatAllocation_EmployeeMangerEmpId" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_FloorInfo_Office" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_FloorMatrix_FloorInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_ManagerCabin_FloorInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_SeatAllocation_FloorInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_SeatDetails_FloorInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_FloorMatrix_Office" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_ManagerCabin_Office" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_ManagerToSeatPoolTemp_SeatDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_Image_Office" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_Office_State" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_SeatAllocation_Office" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_SeatDetails_Office" ManuallyRouted="false" />
+        <AssociationConnector Association="DigitalDeskManagementFinalDBModel.FK_SeatAllocation_SeatDetails" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
